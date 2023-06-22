@@ -26,6 +26,7 @@ public class Main {
 
         //opening tab "Health indicators"
         HealthIndicators.openingHealthIndicators(driver);
+        HealthIndicators.findElements(driver);
     }
 
 }

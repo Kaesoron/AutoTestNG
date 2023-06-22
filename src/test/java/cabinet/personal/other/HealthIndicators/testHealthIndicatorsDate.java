@@ -3,8 +3,11 @@ package cabinet.personal.other.HealthIndicators;
 import cabinet.CabinetLogIn;
 import cabinet.personal.PersonalCabinet;
 import cabinet.personal.other.OtherTab;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -49,8 +52,22 @@ public class testHealthIndicatorsDate {
 
 
 
-
-    public void test1() {
-        System.out.println("Testing date filtering");
+    @Test(description = "Possibility to set up period from date")
+    public void canSelectDateFrom() {
+        WebElement fromDate = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[1]/div/div[3]/div[1]"));
+        Assert.assertTrue(fromDate.isEnabled());
     }
+
+    @Test(description = "Possibility to set up period till date")
+    public void canSelectDatetill() {
+        WebElement tillDate = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[1]/div/div[3]/div[2]"));
+        Assert.assertTrue(tillDate.isEnabled());
+    }
+
+    @Test(description = "Date clearance clickable")
+    public void canClearDates() {
+        WebElement clearDate = driver.findElement(By.xpath("//a[@class='clear']"));
+        clearDate.click();
+    }
+
 }

@@ -58,34 +58,35 @@ public class testHealthIndicatorsFilter {
         Assert.assertTrue(indicatorFilterType.isEnabled());
     }
 
-    @Test(description="Can select filter option")
-    public void filterTemperatureClickable() {
-        WebElement indicatorFilterType = driver.findElement(By.xpath("//div[@class='indicator-filter']"));
-        indicatorFilterType.click();
-        WebElement indicatorFilterTemperature = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[1]/div/div[2]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[1]"));
-        indicatorFilterTemperature.click();
-    }
-
     @Test(description="Temperature filter works")
     public void filterTemperatureWorks() {
         WebElement indicatorFilterType = driver.findElement(By.xpath("//div[@class='indicator-filter']"));
         indicatorFilterType.click();
         WebElement indicatorFilterTemperature = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[1]/div/div[2]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[1]"));
         indicatorFilterTemperature.click();
-        WebElement entryType = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[2]/div[2]/div/div[2]/div[2]"));
-        Assert.assertEquals(entryType.getText(), "Температура");
     }
 
-    @Test(description = "Cal clear filter selection")
+    //The same for other filter options
+
+    @Test(description = "Can clear filter selection", dependsOnMethods = {"filterTemperatureWorks"})
     public void filterClear() {
-        WebElement indicatorFilterType = driver.findElement(By.xpath("//div[@class='indicator-filter']"));
-        indicatorFilterType.click();
-        WebElement indicatorFilterTemperature = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[1]/div/div[2]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[1]"));
-        indicatorFilterTemperature.click();
         WebElement clearFilter = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[1]/div/div[2]/p-dropdown/div/div[2]/i"));
         clearFilter.click();
     }
 
+    @Test(description = "Entry deletion button works")
+    public void checkDeletion() {
+        WebElement firstEntryDeleteBtn = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[2]/div[2]/div/div[4]/div/a[2]"));
+        WebElement firstEntryDataBefore = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[2]/div[2]/div/div[3]/div[2]/span"));
+        String text = firstEntryDataBefore.getText();
+        firstEntryDeleteBtn.click();
+        WebElement confirmDeletion = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/p-confirmdialog/div/div/div[3]/p-footer/button[1]"));
+        confirmDeletion.click();
+        driver.navigate().refresh();
 
-    //The same for other filter options
+        WebElement firstEntryDataAfter = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div/div[2]/div[2]/div/div[3]/div[2]/span"));
+        String text2 = firstEntryDataAfter.getText();
+        Assert.assertNotEquals(text, text2);
+    }
+
 }

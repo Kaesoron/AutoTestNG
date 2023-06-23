@@ -96,30 +96,31 @@ public class testHealthIndicatorsPagination {
         Assert.assertNotEquals(firstEntryDataBefore.getText().substring(0, 300), firstEntryDataAfter.getText().substring(0, 300));
     }
 
-//    @Test(description = "changing number of entries on page", dependsOnMethods = {"getPageByNumber"})
-//    public void changeEntriesNumber() {
-//        WebElement entryListQuantityCheckbox = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[2]"));
-//        entryListQuantityCheckbox.click();
-//        WebElement entryListQuantity5 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[1]"));
-//        entryListQuantity5.click();
-//        WebElement entryListTotal5 = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div[last()]"));
-//
-//        WebElement entryListQuantityCheckbox2 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[2]"));
-//        entryListQuantityCheckbox2.click();
-//        WebElement entryListQuantity10 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[2]"));
-//        entryListQuantity10.click();
-//        WebElement entryListTotal10 = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div[last()]"));
-//
-//        WebElement entryListQuantityCheckbox3 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[2]"));
-//        entryListQuantityCheckbox3.click();
-//        WebElement entryListQuantity20 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[3]"));
-//        entryListQuantity20.click();
-//        WebElement entryListTotal20 = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div[last()]"));
-//
-//        Assert.assertNotEquals(entryListTotal5, entryListTotal10);
-//        Assert.assertNotEquals(entryListTotal5,  entryListTotal20);
-//        Assert.assertNotEquals(entryListTotal10, entryListTotal20);
-//
-//    not working due to dynamic page content - in progress}
+    @Test(description = "changing number of entries on page", dependsOnMethods = {"getPageByNumber"})
+    public void changeEntriesNumber() {
+        WebElement entryListQuantityCheckbox = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[2]"));
+        entryListQuantityCheckbox.click();
+        WebElement entryListQuantity5 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[1]"));
+        entryListQuantity5.click();
+        WebElement entryListTotal5 = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div[last()]"));
+
+        driver.navigate().refresh();
+        WebElement entryListQuantityCheckbox2 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[2]"));
+        entryListQuantityCheckbox2.click();
+        WebElement entryListQuantity10 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[2]"));
+        entryListQuantity10.click();
+        WebElement entryListTotal10 = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div[last()]"));
+
+        driver.navigate().refresh();
+        WebElement entryListQuantityCheckbox3 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[2]"));
+        entryListQuantityCheckbox3.click();
+        WebElement entryListQuantity20 = driver.findElement(By.xpath("//*[@id=\"page-size-container\"]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[3]"));
+        entryListQuantity20.click();
+        WebElement entryListTotal20 = driver.findElement(By.xpath("/html/body/app-root/div/app-account/main/app-patient-card/main/div/app-health-indicators/main/div[1]/div[last()]"));
+
+        Assert.assertNotEquals(entryListTotal5, entryListTotal10);
+        Assert.assertNotEquals(entryListTotal5, entryListTotal20);
+        Assert.assertNotEquals(entryListTotal10, entryListTotal20);
+    }
 }
 
